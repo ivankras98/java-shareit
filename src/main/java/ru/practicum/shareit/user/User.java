@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Модель пользователя.
+ * Сущность пользователя.
  */
 @Data
 @AllArgsConstructor
