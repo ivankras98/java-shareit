@@ -10,7 +10,6 @@ import ru.practicum.shareit.item.model.Comment;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.user.User;
 import ru.practicum.shareit.user.UserRepository;
-import ru.practicum.shareit.booking.Booking;
 import ru.practicum.shareit.booking.BookingMapper;
 import ru.practicum.shareit.booking.BookingRepository;
 import ru.practicum.shareit.booking.BookingStatus;
@@ -31,6 +30,7 @@ public class ItemServiceImpl implements ItemService {
         Item item = ItemMapper.toItem(itemDto, owner);
         return ItemMapper.toItemDto(itemRepository.save(item));
     }
+
     @Override
     public CommentDto addComment(Long userId, Long itemId, CommentDto commentDto) {
         User author = getUserOrThrow(userId);

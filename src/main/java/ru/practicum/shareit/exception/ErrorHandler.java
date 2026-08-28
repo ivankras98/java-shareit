@@ -43,6 +43,7 @@ public class ErrorHandler {
         log.warn("400 Bad Request: {}", e.getMessage());
         return new ErrorResponse(e.getMessage());
     }
+
     @ExceptionHandler(ForbiddenException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public ErrorResponse handleForbidden(ForbiddenException e) {
