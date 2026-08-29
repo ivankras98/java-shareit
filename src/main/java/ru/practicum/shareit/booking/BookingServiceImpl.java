@@ -2,6 +2,7 @@ package ru.practicum.shareit.booking;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.shareit.booking.dto.BookingDto;
 import ru.practicum.shareit.booking.dto.BookingResponseDto;
 import ru.practicum.shareit.exception.NotFoundException;
@@ -23,6 +24,7 @@ public class BookingServiceImpl implements BookingService {
     private final UserRepository userRepository;
 
     @Override
+    @Transactional
     public BookingResponseDto create(Long userId, BookingDto bookingDto) {
         User booker = getUserOrThrow(userId);
         Item item = itemRepository.findById(bookingDto.getItemId())
@@ -49,6 +51,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    @Transactional
     public BookingResponseDto approve(Long userId, Long bookingId, boolean approved) {
         Booking booking = getBookingOrThrow(bookingId);
 
