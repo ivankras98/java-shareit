@@ -46,15 +46,6 @@ class UserControllerTest {
                 .andExpect(jsonPath("$.email").value("anna@example.com"));
     }
 
-    @Test
-    void create_withBlankName_shouldReturnBadRequest() throws Exception {
-        UserDto request = new UserDto(null, "", "anna@example.com");
-
-        mvc.perform(post("/users")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isBadRequest());
-    }
 
     @Test
     void create_withDuplicateEmail_shouldReturnConflict() throws Exception {

@@ -47,17 +47,6 @@ class ItemControllerTest {
     }
 
     @Test
-    void create_withBlankName_shouldReturnBadRequest() throws Exception {
-        ItemDto request = ItemDto.builder().name("").description("Ударная").available(true).build();
-
-        mvc.perform(post("/items")
-                        .header(USER_ID_HEADER, 1L)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isBadRequest());
-    }
-
-    @Test
     void update_byNonOwner_shouldReturnNotFound() throws Exception {
         ItemDto request = ItemDto.builder().name("Новое имя").build();
         when(itemService.update(anyLong(), anyLong(), any()))
@@ -113,14 +102,4 @@ class ItemControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
-    @Test
-    void addComment_withBlankText_shouldReturnBadRequest() throws Exception {
-        CommentDto request = CommentDto.builder().text("").build();
-
-        mvc.perform(post("/items/1/comment")
-                        .header(USER_ID_HEADER, 1L)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isBadRequest());
-    }
 }

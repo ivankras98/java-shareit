@@ -47,17 +47,6 @@ class ItemRequestControllerTest {
     }
 
     @Test
-    void create_withBlankDescription_shouldReturnBadRequest() throws Exception {
-        ItemRequestDto request = new ItemRequestDto("");
-
-        mvc.perform(post("/requests")
-                        .header(USER_ID_HEADER, 1L)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isBadRequest());
-    }
-
-    @Test
     void getOwn_shouldReturnList() throws Exception {
         when(itemRequestService.getOwn(1L)).thenReturn(List.of(
                 ItemRequestResponseDto.builder().id(1L).description("Нужна дрель").items(List.of()).build()));

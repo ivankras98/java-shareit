@@ -1,6 +1,7 @@
 package ru.practicum.shareit.item;
 
 import jakarta.validation.Valid;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -47,6 +48,9 @@ public class ItemController {
     @GetMapping("/search")
     public ResponseEntity<Object> search(@RequestParam String text) {
         log.info("Search items by text '{}'", text);
+        if (text == null || text.isBlank()) {
+            return ResponseEntity.ok(List.of());
+        }
         return itemClient.search(text);
     }
 

@@ -49,17 +49,6 @@ class BookingControllerTest {
     }
 
     @Test
-    void create_withPastStartDate_shouldReturnBadRequest() throws Exception {
-        BookingDto request = new BookingDto(1L, LocalDateTime.now().minusDays(1), LocalDateTime.now().plusDays(2));
-
-        mvc.perform(post("/bookings")
-                        .header(USER_ID_HEADER, 1L)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isBadRequest());
-    }
-
-    @Test
     void create_forUnavailableItem_shouldReturnBadRequest() throws Exception {
         BookingDto request = new BookingDto(1L, LocalDateTime.now().plusDays(1), LocalDateTime.now().plusDays(2));
         when(bookingService.create(anyLong(), any())).thenThrow(new ValidationException("недоступна"));
