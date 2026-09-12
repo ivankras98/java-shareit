@@ -30,9 +30,7 @@ class BookingDtoJsonTest {
 
     @Test
     void deserialize_shouldParseDatesCorrectly() throws Exception {
-        String content = """
-        {"itemId": 1, "start": "2026-09-15T10:00:00", "end": "2026-09-16T10:00:00"}
-        """;
+        String content = "{\"itemId\": 1, \"start\": \"2026-09-15T10:00:00\", \"end\": \"2026-09-16T10:00:00\"}";
 
         BookingDto result = json.parse(content).getObject();
 
